@@ -54,5 +54,22 @@ abstract class TRecord
             }
         }
     }
+    /**
+     * Método __get()
+     * Executado sempre que uma propriedade for requerida
+     */
+    public function __get($prop)
+    {
+        // verifica se existe método get_<propriedade>
+        if (method_exists($this, 'get_' . $prop)) {
+            // executa o método get_<propriedade>
+            return call_user_func(array($this, 'get_' . $prop));
+        } else {
+            // retorna o valor da propiedade
+            if (isset($this->data[$prop])) {
+                return $this->data[$prop];
+            }
+        }
+    }
 }
 ?>
