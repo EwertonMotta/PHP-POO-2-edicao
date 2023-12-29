@@ -83,5 +83,14 @@ abstract class TRecord
         // retorna a constante de classe TABLENAME
         return constant("{$class}::TABLENAME");
     }
+
+    /**
+     * Método fromArray()
+     * Preenche os dados do objeto com um array
+     */
+    public function fromArray($data)
+    {
+        $this->data = $data;
+    }
 }
 ?>
