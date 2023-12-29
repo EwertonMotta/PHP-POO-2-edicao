@@ -187,5 +187,37 @@ abstract class TRecord
             throw new Exception("Não há transação ativa!!");
         }
     }
+
+    /**
+     * Método delete()
+     * Exclui um objeto da base de dados através de seu ID
+     * @param $id = ID do objeto
+     */
+    public function delete($id = NULL)
+    {
+        // o ID é o parâmetro ou a propriedade ID
+        $id = $id ? $id : $this->id;
+        // instancia uma instrução DELETE
+        $sql = new TSqlDelete;
+        $sql->setEntity($this->getEntity());
+
+        // cria critério de seleção de dados
+        $criteria = new TCriteria;
+        $criteria->add(new TFilter('id', '=', $id));
+        // define o critério de seleção baseado no ID
+        $sql->setCriteria($criteria);
+
+        // obtém transação ativa
+        if ($conn = TTransaction::get()) {
+            // faz o log e executa o SQL
+            TTransaction::log($sql->getInstruction());
+            $result = $conn->exec($sql->getInstruction());
+            // retorna o resultado
+            return $result;
+        } else {
+            // se não tiver transação, retorna uma exceção
+            throw new Exception("Não há transação ativa!!");
+        }
+    }
 }
 ?>
