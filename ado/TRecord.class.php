@@ -71,5 +71,17 @@ abstract class TRecord
             }
         }
     }
+
+    /**
+     * Método getEntity()
+     * Retorna o nome da entidade (tabela)
+     */
+    private function getEntity()
+    {
+        // obtém o nome da classe
+        $class = get_class($this);
+        // retorna a constante de classe TABLENAME
+        return constant("{$class}::TABLENAME");
+    }
 }
 ?>
