@@ -92,5 +92,14 @@ abstract class TRecord
     {
         $this->data = $data;
     }
+
+    /**
+     * Método toArray
+     * Retorna os dados do objeto como array
+     */
+    public function toArray()
+    {
+        return $this->data;
+    }
 }
 ?>
