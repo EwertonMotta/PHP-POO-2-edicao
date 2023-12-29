@@ -148,7 +148,7 @@ abstract class TRecord
             return $result;
         } else {
             // se não tiver transação, retorna uma exceção
-            throw new Exception("Não há transação ativa!!");
+            throw new Exception('Não há transação ativa!!');
         }
     }
 
@@ -184,7 +184,7 @@ abstract class TRecord
             return $object;
         } else {
             // se não tiver transação, retorna exceção
-            throw new Exception("Não há transação ativa!!");
+            throw new Exception('Não há transação ativa!!');
         }
     }
 
@@ -216,7 +216,32 @@ abstract class TRecord
             return $result;
         } else {
             // se não tiver transação, retorna uma exceção
-            throw new Exception("Não há transação ativa!!");
+            throw new Exception('Não há transação ativa!!');
+        }
+    }
+
+    /**
+     * Método getLast()
+     * retorna o último ID
+     */
+    private function getLast()
+    {
+        // instancia transação
+        if ($conn = TTransaction::get()) {
+            // instancia instrução SELECT
+            $sql = new TSqlSelect;
+            $sql->addColumn('MAX(ID) as ID');
+            $sql->setEntity($this->getEntity());
+            // cria log e executa instrução SQL
+            TTransaction::log($sql->getInstruction());
+            $result = $conn->Query($sql->getInstruction());
+            // retorna os dados do banco
+            $row = $result->fetch();
+            return $result;
+        } else {
+            // se não tiver transação, retorna uma exceção
+            throw new Exception('Não há transação Ativa!!');
+
         }
     }
 }
