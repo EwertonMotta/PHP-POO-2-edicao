@@ -101,5 +101,56 @@ abstract class TRecord
     {
         return $this->data;
     }
+
+    /**
+     * Método store()
+     * Armazena o objeto na base de dados e retorna
+     * o número de linhas afetadas pela instrução SQL (zero ou um)
+     */
+    public function store()
+    {
+        // verifica se tem ID ou se existe na base de dados
+        if (empty($this->data['id']) OR (!$this->load($this->id))) {
+            // incrementa o ID
+            if (empty($this->data['id'])) {
+                $this->id = $this->getLast() + 1;
+            }
+            // cria uma instrução de insert
+            $sql = new TSqlInsert;
+            $sql->setEntity($this->getEntity());
+            // percorre os dados do objeto
+            foreach ($$this->data as $key => $value) {
+                // passa os dados do objeto para o SQL
+                $sql->setRowData($key, $this->$key);
+            }
+        } else {
+            // instancia instrução de update
+            $sql = new TSqlUpdate;
+            $sql->setEntity($this->getEntity());
+            // cria m critério de seleção baseado no ID
+            $criteria = new TCriteria;
+            $criteria->add(new TFilter('id', '=', $this->id));
+            $sql->setCriteria($criteria);
+            // percorre os dados do objeto
+            foreach ($$this->data as $key => $value) {
+                if ($key !== 'id') { // o ID não precisa ir no UPDATE
+                    // passa os dados do objeto para o SQL
+                    $sql->setRowData($key, $this->$key);
+                }
+            }
+        }
+        // obtém transação ativa
+        if ($conn = TTransaction::get()) {
+            // faz o log e executa o SQL
+            TTransaction::log($sql->getInstruction());
+            $result = $conn->exec($sql->getInstruction());
+            // retorna o resultado
+            return $result;
+        } else {
+            // se não tiver transação, retorna uma exceção
+            throw new Exception("Não há transação ativa!!");
+            
+        }
+    }
 }
 ?>
