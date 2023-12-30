@@ -12,6 +12,7 @@
 - Praticar testes automatizados com [Pest](https://pestphp.com)
 - Praticar o uso massivo das [PSR's](
 https://www.php-fig.org/psr)
+- Implementar tipagem
 
 ---
 
