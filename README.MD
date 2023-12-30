@@ -12,5 +12,8 @@
 - Praticar testes automatizados com [Pest](https://pestphp.com)
 - Praticar o uso massivo das [PSR's](
 https://www.php-fig.org/psr)
+
+---
+
 O projeto está sendo desenvolvido acompanhando os ensinamentos do livro, após conclusão, será criada uma branch para manter a versão legada e todas as alterações que ocorrer, ficaram na __main__.
 
