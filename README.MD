@@ -1,4 +1,4 @@
-## Projeto de estudo do livro (PHP Programando com Orientação a Objetos - 2ª Edição)[https://a.co/d/0iK3OTb]
+## Projeto de estudo do livro [PHP Programando com Orientação a Objetos - 2ª Edição](https://a.co/d/0iK3OTb)
 
 ### Esse estudo está dividido em 2 etapas.
 
@@ -9,8 +9,8 @@
 
 - Praticar o desenvolvimento com PHP puro (sem uso de frameworks)
 - Praticar a refatoração/atualização de projetos legados
-- Praticar testes automatizados com (Pest)[https://pestphp.com/]
+- Praticar testes automatizados com [Pest](https://pestphp.com)
 - Praticar o uso massivo das PSR's
 
-O projeto está sendo desenvolvido acompanhando os ensinamentos do livro, após conclusão, será criada uma branch para manter a versão legada e todas as alterações que ocorrer, ficaram na _main_.
+O projeto está sendo desenvolvido acompanhando os ensinamentos do livro, após conclusão, será criada uma branch para manter a versão legada e todas as alterações que ocorrer, ficaram na __main__.
 
